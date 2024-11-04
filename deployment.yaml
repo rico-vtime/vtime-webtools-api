@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-test
+  labels:
+    name: fastapi-test
+spec:
+  selector:
+    matchLabels:
+      name: fastapi-test
+  template:
+    metadata:
+      labels:
+        name: fastapi-test
+    spec:
+      containers:
+        - name: fastapi-test
+          image: vt/vtime-fastapi-test
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-test-service
+spec:
+  selector:
+    name: fastapi-test
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+  # type: 
+  # ClusterIP（默认）- 在集群的内部 IP 上公开 Service。这种类型使得 Service 只能从集群内访问。
+  # NodePort - 使用 NAT 在集群中每个选定 Node 的相同端口上公开 Service 。使用<NodeIP>:<NodePort> 从集群外部访问 Service。是 ClusterIP 的超集。
+  # LoadBalancer - 在当前云中创建一个外部负载均衡器（如果支持的话），并为 Service 分配一个固定的外部IP。是 NodePort 的超集。
+  # ExternalName - 将 Service 映射到 externalName 字段的内容（例如 foo.bar.example.com），通过返回带有该名称的 CNAME 记录实现。不设置任何类型的代理。这种类型需要 kube-dns 的 v1.7 或更高版本，或者 CoreDNS 的 0.8 或更高版本。
