@@ -1,6 +1,6 @@
 import numpy as np
-from matplotlib import pyplot as plt
-from pandas import DataFrame
+# from matplotlib import pyplot as plt
+# from pandas import DataFrame
 
 
 def calculate_sma(prices, window_size):

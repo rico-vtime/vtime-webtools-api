@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 import akshare as ak
-import pandas as pd
 import math
-import database
 import utils
 
 router = APIRouter(
