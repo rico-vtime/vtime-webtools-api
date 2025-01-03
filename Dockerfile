@@ -3,7 +3,8 @@ FROM python:3.9-slim
 EXPOSE 80
 WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip3 config  set global.index-url http://mirrors.aliyun.com/pypi/simple/
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt --trusted-host mirrors.aliyun.com
 COPY ./app /code/app
 
 WORKDIR /code/app
