@@ -11,7 +11,6 @@ app.include_router(hk)
 
 origins = [
     "*",
-    "http://localhost:5173",
 ]
 
 app.add_middleware(
